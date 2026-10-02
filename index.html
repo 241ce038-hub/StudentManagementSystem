@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            SMS
+        </div>
+
+
+        <a href="#"
+           class="menu-link active"
+           onclick="showSection('dashboard'); return false;">
+            Dashboard
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="showSection('addStudent'); return false;">
+            Add Student
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="showSection('studentList'); return false;">
+            Student List
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="showSection('courses'); return false;">
+            Courses
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="showSection('attendancePage'); return false;">
+            Attendance
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="showSection('reports'); return false;">
+            Reports
+        </a>
+
+
+        <a href="#"
+           class="menu-link"
+           onclick="logout(); return false;">
+            Logout
+        </a>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
+    <div class="main">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div>
+                <h1>Student Management System</h1>
+                <p class="subtitle">
+                    Student Administration Dashboard
+                </p>
+            </div>
+
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search student..."
+            >
+
+        </div>
+
+
+
+        <!-- ==========================================
+             DASHBOARD
+        =========================================== -->
+
+        <section
+            id="dashboard"
+            class="page-section"
+        >
+
+            <h2>Dashboard</h2>
+
+
+            <div class="cards">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Total Students
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="totalStudents"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Total Courses
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="totalCourses"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Average Attendance
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="dashboardAttendance"
+                    >
+                        0%
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Teachers
+                    </div>
+
+                    <div class="stat-number">
+                        10
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="welcome-card">
+
+                <h3>
+                    Welcome to Student Management System
+                </h3>
+
+                <p>
+                    Manage students, courses, attendance
+                    and reports from one place.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             ADD / EDIT STUDENT
+        =========================================== -->
+
+        <section
+            id="addStudent"
+            class="page-section"
+        >
+
+            <h2 id="studentFormTitle">
+                Add Student
+            </h2>
+
+
+            <div class="form-card">
+
+                <form id="studentForm">
+
+                    <input
+                        type="hidden"
+                        id="editStudentId"
+                    >
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter student name"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter email"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <input
+                            type="text"
+                            id="department"
+                            placeholder="Enter department"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="phone"
+                            placeholder="Enter phone number"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Marks
+                        </label>
+
+                        <input
+                            type="number"
+                            id="marks"
+                            min="0"
+                            max="100"
+                            placeholder="Enter marks"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Attendance (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="attendance"
+                            min="0"
+                            max="100"
+                            placeholder="Enter attendance"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                            id="saveStudentBtn"
+                        >
+                            Add Student
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="cancelEditBtn"
+                            onclick="cancelEdit()"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             STUDENT LIST
+        =========================================== -->
+
+        <section
+            id="studentList"
+            class="page-section"
+        >
+
+            <h2>Student List</h2>
+
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Department</th>
+
+                            <th>Marks</th>
+
+                            <th>Attendance</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             COURSES
+        =========================================== -->
+
+        <section
+            id="courses"
+            class="page-section"
+        >
+
+            <h2>Courses</h2>
+
+
+            <div class="form-card">
+
+                <h3>
+                    Add New Course
+                </h3>
+
+
+                <form id="courseForm">
+
+                    <div class="course-form">
+
+                        <div class="form-group">
+
+                            <label>
+                                Course Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="courseName"
+                                placeholder="Enter course name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Course Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="courseCode"
+                                placeholder="Enter course code"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+                            Add Course
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <div class="table-card">
+
+                <h3>
+                    Available Courses
+                </h3>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+
+                            <th>Course Name</th>
+
+                            <th>Course Code</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="courseTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             ATTENDANCE
+        =========================================== -->
+
+        <section
+            id="attendancePage"
+            class="page-section"
+        >
+
+            <h2>Attendance</h2>
+
+
+            <div class="cards">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Average Attendance
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="overallAttendance"
+                    >
+                        0%
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Students ≥ 75%
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="aboveAttendance"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Students &lt; 75%
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="belowAttendance"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Total Students
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="attendanceTotalStudents"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-card">
+
+                <h3>
+                    Student Attendance
+                </h3>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Department</th>
+
+                            <th>Attendance</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="attendanceTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             REPORTS
+        =========================================== -->
+
+        <section
+            id="reports"
+            class="page-section"
+        >
+
+            <h2>Reports</h2>
+
+
+            <div class="cards">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Total Students
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="reportTotalStudents"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Average Marks
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="averageMarks"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-title">
+                        Average Attendance
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="averageAttendance"
+                    >
+                        0%
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-card">
+
+                <h3>
+                    Student Performance Report
+                </h3>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Marks</th>
+
+                            <th>Attendance</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
